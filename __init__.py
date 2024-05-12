@@ -20,7 +20,7 @@
 bl_info = {
     "name": "VRM Converter",
     "author": "TRPHB Animation (Roni Raihan) and Multiple Authors",
-    "version": (0, 4, 1),
+    "version": (0, 4, 2),
     "blender": (4, 1, 0),
     "location": "File > Import-Export",
     "description": "Exports and Import VRM",
