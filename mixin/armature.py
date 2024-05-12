@@ -140,16 +140,16 @@ class ArmatureMixin(object):
     def _make_vrm_spring(self, gltf_node_id, bone, armature):
         vrm_spring = {
             'comment': bone.name,
-            'stiffiness': 1,  # The resilience of the swaying object (the power of returning to the initial pose)
-            'gravityPower': 0,
-            'dragForce': 0,  # The resistance (deceleration) of automatic animation
+            'stiffiness': 0.06,  # The resilience of the swaying object (the power of returning to the initial pose)
+            'gravityPower': 1.0,
+            'dragForce': 0.03,  # The resistance (deceleration) of automatic animation
             'gravityDir': {
                 'x': 0,
                 'y': -1,
                 'z': 0,
             },  # down
             'center': -1,
-            'hitRadius': 0,
+            'hitRadius': 0.1,
             'bones': [gltf_node_id],
             'colliderGroups': [],
         }
@@ -176,6 +176,8 @@ class ArmatureMixin(object):
                     if item1.id == item2.id and item2.aktif == True:
                         #collider_aktif = i
                         vrm_spring['colliderGroups'].append(i)
+        else:
+            vrm_spring['hitRadius'] = 0
 
         return vrm_spring
     
