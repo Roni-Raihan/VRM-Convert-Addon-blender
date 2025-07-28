@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Roni Raihan
+# Copyright (c) 2024-2025 Roni Raihan
 # Copyright (c) 2020-2024 kitsune.ONE team.
 # Basic script / soure code by kitsune.ONE team. see < https://github.com/kitsune-ONE-team/KITSUNETSUKI-Asset-Tools >.
 
@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import bpy
 import io
 import os
 import struct
@@ -96,7 +97,8 @@ class GLTFBuffer(object):
             part = None
 
             if 'uri' in extras:
-                tfilepath = os.path.join(os.path.dirname(self._filepath), extras['uri'])
+                #tfilepath = os.path.join(os.path.dirname(self._filepath), extras['uri'])
+                tfilepath = extras['uri']
                 with open(tfilepath, 'rb') as f:
                     part = f.read()
 
@@ -123,8 +125,8 @@ class GLTFBuffer(object):
             with open(buffer_fp, 'wb') as f:
                 f.write(data)
 
-            uri = os.path.relpath(
-                buffer_fp, os.path.dirname(self._filepath))
+            uri = bpy.path.relpath(
+                buffer_fp, bpy.path.dirname(self._filepath))
 
         if len(data):
             gltf_buffer = {

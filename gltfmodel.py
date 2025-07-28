@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Roni Raihan
+# Copyright (c) 2024-2025 Roni Raihan
 # Copyright (c) 2020-2024 kitsune.ONE team.
 # Basic script / soure code by kitsune.ONE team. see < https://github.com/kitsune-ONE-team/KITSUNETSUKI-Asset-Tools >.
 
@@ -106,7 +106,7 @@ class GLTFExporter(AnimationMixin, GeomMixin, MaterialMixin,
         gltf_node = {
             'asset': {
                 'generator': (
-                    'VRM Exporter by TRPHB Animation - https://trakteer.id/trphbanimation/showcase/export-modelrig-di-blender-menjadi-vrm-addon-blender-40-ijTXu'
+                    'VRM Exporter by TRPHB Animation - https://github.com/Roni-Raihan/VRM-Convert-Addon-blender'
                     ' VRM Coverter'),
                 'version': '2.0',
             },

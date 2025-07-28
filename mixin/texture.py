@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Roni Raihan
+# Copyright (c) 2024-2025 Roni Raihan
 # Copyright (c) 2020-2024 kitsune.ONE team.
 # Basic script / soure code by kitsune.ONE team. see < https://github.com/kitsune-ONE-team/KITSUNETSUKI-Asset-Tools >.
 
@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see < https://www.gnu.org/licenses/ >.
 
+import bpy
 import os
 
 #from . import spec
@@ -61,8 +62,8 @@ class TextureMixin(object):
             )
 
     def make_texture(self, type_, image_texture):
-        filepath = image_texture.image.filepath.lstrip('/')
-        path = os.path.dirname(self._output)
+        filepath = image_texture.image.filepath
+        #path = os.path.dirname(self._output)
 
         gltf_sampler = {
             'name': image_texture.image.name,
@@ -75,14 +76,16 @@ class TextureMixin(object):
             'mimeType': 'image/{}'.format(image_texture.image.file_format.lower()),
         }
 
-        if self._output.endswith('.gltf'):  # external texture
-            gltf_image['uri'] = os.path.join(path, filepath)
-        else:  # embedded texture
-            gltf_image['extras'] = {}
-            if image_texture.image.packed_file:
-                gltf_image['extras']['data'] = image_texture.image.packed_file.data
-            else:
-                gltf_image['extras']['uri'] = os.path.join(self.get_cwd(), filepath)
+        #if self._output.endswith('.gltf'):  # external texture
+            #gltf_image['uri'] = os.path.join(path, filepath)
+        #else:  # embedded texture
+        
+        gltf_image['extras'] = {}
+        if image_texture.image.packed_file:
+            gltf_image['extras']['data'] = image_texture.image.packed_file.data
+        else:
+            gltf_image['extras']['uri'] = bpy.path.abspath(filepath)
+            #gltf_image['extras']['uri'] = os.path.join(self.get_cwd(), filepath)
 
         if image_texture.extension == 'CLIP':
             gltf_sampler['wrapS'] = spec.CLAMP_TO_EDGE
